@@ -27,7 +27,7 @@
           $(document).ready(function () {
           $.ajax({
             type: "GET",
-            url: 'https://mwtt7f66g6.execute-api.eu-central-1.amazonaws.com/dev/dev?tendaId=' + tendaId.value + '&qrcode=' + label.textContent,
+            url: 'https://9xoqrdy855.execute-api.us-east-1.amazonaws.com/dev/dev?tendaId=' + tendaId.value + '&qrcode=' + label.textContent,
             contentType: 'application/json',
             crossDomain: true,
             processData: false,
