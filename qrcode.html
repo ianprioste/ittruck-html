@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<h1 style="text-align: center;">QR Code IT Truck</h1>
+
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>Checkin Tenda</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <link rel='stylesheet' type='text/css' media='screen' href='participantes.css'>
+  <script src='participantes.js'></script>
+</head>
+
+<script src="botao.js"></script>
+<script src="/js/html5-qrcode.min.js"></script>
+<style>
+  .result {
+    background-color: green;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .resultado{
+    background-color: blue;
+    color: #fff;
+    padding: 20px;
+  }
+
+  .row {
+    display: flex;
+  }
+</style>
+<body>
+  
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div float="center">
+        <div style="width:500px;" id="reader"></div>
+      </div>
+    </div>
+    <div class="col" style="padding:30px">
+      <h4>Selecione sua tenda</h4>
+      <select name="select" class="tenda" id="tendaName">
+        <option value="Digital Life">Digital Life</option>
+        <option value="IT Plus">IT Plus</option>
+        <option value="Jogos">Jogos</option>
+      </select>
+    </div>
+    <div class="col" style="padding:30px;">
+      <h4>SCAN RESULT</h4>
+      <div id="result">Result Here</div>
+      <br>
+      <h5>Validar Visitas</h5>
+      <td><div id="resultado">Validar Checkin</div></td>
+    </div>
+  </div>
+</div>
+</body>
+
+<script type="text/javascript">
+  function onScanSuccess(qrCodeMessage) {
+    document.getElementById('result').innerHTML = '<span class="result">' + qrCodeMessage + '</span>';
+    var tendaName = document.getElementById('tendaName')
+    var Message = document.getElementById('result')
+    resultado = JSON.stringify({ nome: qrCodeMessage, tenda:  tendaName.value});
+    
+    document.getElementById("resultado").innerHTML = resultado
+ 
+    $(document).ready(function () {
+        $.ajax({
+          type: "GET",
+          url: 'https://mwtt7f66g6.execute-api.eu-central-1.amazonaws.com/dev/dev?tendaName=' + tendaName.value + '&qrcode=' + qrCodeMessage,
+          contentType: 'application/json',
+          crossDomain: true,
+          processData: false,
+          dataType: "json",
+          data: '',
+          success: function (data) {
+          console.log(data);
+
+          if (data.status == '200') // validação ok
+          {
+            document.getElementById("Bem vindo, pode pegar seu kit").innerHTML = resultado
+          }
+          else if (data.status == '500') // validação errada
+          {
+            document.getElementById("Bem vindo de volta").innerHTML = resultado
+          }
+
+          },
+          error: function (jqXHR, error, errorThrown) {
+            document.getElementById("Ops, voce precisa realizar seu check-in").innerHTML = resultado
+          }
+        });
+    });
+  
+   
+    
+  }
+
+
+  function onScanError(errorMessage) {
+    //handle scan error
+  }
+
+  var html5QrcodeScanner = new Html5QrcodeScanner(
+    "reader", { fps: 10, qrbox: 250 });
+  html5QrcodeScanner.render(onScanSuccess, onScanError);
+
+</script>
+
+</html>
