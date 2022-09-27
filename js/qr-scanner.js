@@ -20,14 +20,14 @@
           clearTimeout(label.highlightTimeout);
           label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
   
-          const tendaName = {value: 'Jogos'}
+          const tendaId = {value: 173}
   
           const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaName.value});
   
           $(document).ready(function () {
           $.ajax({
             type: "GET",
-            url: 'https://mwtt7f66g6.execute-api.eu-central-1.amazonaws.com/dev/dev?tendaName=' + tendaName.value + '&qrcode=' + label.textContent,
+            url: 'https://mwtt7f66g6.execute-api.eu-central-1.amazonaws.com/dev/dev?tendaId=' + tendaId.value + '&qrcode=' + label.textContent,
             contentType: 'application/json',
             crossDomain: true,
             processData: false,
@@ -36,6 +36,12 @@
             success: function (data) {
             console.log(data);
   
+            //codigo 300 - Pessoa nao tem pre registro
+
+            // codigo 200 - Cadastro realizado com sucesso
+
+            // codigo 205 - Já esta cadastrada
+
             if (data.status == '200') // validação ok
             {
               document.getElementById("Bem vindo, pode pegar seu kit").innerHTML = resultado
