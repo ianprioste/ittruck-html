@@ -27,7 +27,7 @@
 
         const tendaId = {value: 190}
 
-        const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaName.value});
+        const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaId.value});
   
 
           if (reading)  {
@@ -56,6 +56,11 @@
                         console.log("Cadastrado")
                     }
                     else if (data.status == '204') // Já esta cadastrada
+                    {
+                        document.getElementById("resposta").innerHTML = data.nome
+                        console.log("ja cadastrado")
+                    }
+                    else if (data.status == '300') // QR CODE INVÁLIDO
                     {
                         document.getElementById("resposta").innerHTML = data.nome
                         console.log("ja cadastrado")

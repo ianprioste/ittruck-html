@@ -31,24 +31,29 @@
 
 </head>
 
-<body>
-  <div id="0">
-    <div id="top" class="center">
+<body class="d-flex flex-column justify-content-center">
+  <div>
+    <div class="d-flex justify-content-center">
       <img src="/scr/img/logo.png" alt="">
     </div>
-    <div id="top" class="center">
+    <div class="d-flex justify-content-center">
       <h1>Validação QR-CODE</h1>
     </div>
-    <div id="container-qrcode" class="center-column">
-      <div id="tenda" class="center-column">
-        <h2>Selecione sua tenda</h2>
-        <select name="select" class="tenda" id="tendaName">
-          <option value="Digital Life">Digital Life</option>
-          <option value="IT Plus">IT Plus</option>
-          <option value="Jogos">Jogos</option>
-        </select>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="inputGroupSelect01">Options</label>
       </div>
-      <div id="video-container">
+      <select class="custom-select" id="inputGroupSelect01">
+        <option selected>Choose...</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+    </div>
+    
+    
+      <div class="d-flex justify-content-center">
         <video id="qr-video"></video>
       </div>
       <div class="invisible">
