@@ -1,4 +1,6 @@
       import QrScanner from "/js/qr-scanner.min.js";
+      import "https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js";
+
    
       const video = document.getElementById('qr-video');
       const videoContainer = document.getElementById('video-container');
@@ -11,53 +13,67 @@
       const camQrResultTimestamp = document.getElementById('cam-qr-result-timestamp');
       const fileSelector = document.getElementById('file-selector');
       const fileQrResult = document.getElementById('file-qr-result');
-  
+      const resposta = document.getElementById('resposta')
+      let reading = true;
+
       function setResult(label, result) {
-          label.textContent = result.data;
-          console.log(label.textContent);
-          camQrResultTimestamp.textContent = new Date().toString();
-          label.style.color = 'teal';
-          clearTimeout(label.highlightTimeout);
-          label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
-  
-          const tendaId = {value: 173}
-  
-          const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaName.value});
-  
-          $(document).ready(function () {
-          $.ajax({
-            type: "GET",
-            url: 'https://9xoqrdy855.execute-api.us-east-1.amazonaws.com/dev/dev?tendaId=' + tendaId.value + '&qrcode=' + label.textContent,
-            contentType: 'application/json',
-            crossDomain: true,
-            processData: false,
-            dataType: "json",
-            data: '',
-            success: function (data) {
-            console.log(data);
-  
-            //codigo 300 - Pessoa nao tem pre registro
+        label.textContent = result.data;
+        console.log(label.textContent);
+        
+        camQrResultTimestamp.textContent = new Date().toString();
+        label.style.color = 'teal';
+        clearTimeout(label.highlightTimeout);
+        label.highlightTimeout = setTimeout(() => label.style.color = 'inherit', 100);
 
-            // codigo 200 - Cadastro realizado com sucesso
+        const tendaId = {value: 190}
 
-            // codigo 205 - Já esta cadastrada
-
-            if (data.status == '200') // validação ok
-            {
-              document.getElementById("Bem vindo, pode pegar seu kit").innerHTML = resultado
-            }
-            else if (data.status == '500') // validação errada
-            {
-              document.getElementById("Bem vindo de volta").innerHTML = resultado
-            }
+        const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaName.value});
   
-            },
-            error: function (jqXHR, error, errorThrown) {
-              document.getElementById("Ops, voce precisa realizar seu check-in").innerHTML = resultado
-            }
-          });
-      });
-    
+
+          if (reading)  {
+
+            $(document).ready(function () {
+                $.ajax({
+                  type: "GET",
+                  url: 'https://9xoqrdy855.execute-api.us-east-1.amazonaws.com/dev/dev?tendaId=' + tendaId.value + '&qrcode=' + label.textContent,
+                  contentType: 'application/json',
+                  crossDomain: true,
+                  processData: false,
+                  dataType: "json",
+                  data: '',
+
+                  success: function (data) {
+
+                    console.log(data);
+
+
+                    $('#exampleModal').modal('show'); // Abrir modal
+                
+        
+                    if (data.status == '200') // Cadastro realizado com sucesso
+                    {
+                        document.getElementById("resposta").innerHTML = data.nome
+                        console.log("Cadastrado")
+                    }
+                    else if (data.status == '204') // Já esta cadastrada
+                    {
+                        document.getElementById("resposta").innerHTML = data.nome
+                        console.log("ja cadastrado")
+                    }
+            
+                    },
+                    error: function (jqXHR, error, errorThrown) { //Pessoa nao tem pre registro
+                        document.getElementById("resposta").innerHTML = data.nome
+                    }
+
+                });
+
+            });
+
+            reading = false;
+
+          }
+  
   
           
       }
@@ -75,8 +91,8 @@
   
       const updateFlashAvailability = () => {
           scanner.hasFlash().then(hasFlash => {
-              camHasFlash.textContent = hasFlash;
-              flashToggle.style.display = hasFlash ? 'inline-block' : 'none';
+             // camHasFlash.textContent = hasFlash;
+             // flashToggle.style.display = hasFlash ? 'inline-block' : 'none';
           });
       };
   
@@ -90,26 +106,26 @@
               const option = document.createElement('option');
               option.value = camera.id;
               option.text = camera.label;
-              camList.add(option);
+              //camList.add(option);
           }));
       });
   
-      QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
+      //QrScanner.hasCamera().then(hasCamera => camHasCamera.textContent = hasCamera);
   
       // for debugging
       window.scanner = scanner;
   
-      document.getElementById('scan-region-highlight-style-select').addEventListener('change', (e) => {
+/*      document.getElementById('scan-region-highlight-style-select').addEventListener('change', (e) => {
           videoContainer.className = e.target.value;
           scanner._updateOverlay(); // reposition the highlight because style 2 sets position: relative
       });
-  
+
       document.getElementById('show-scan-region').addEventListener('change', (e) => {
           const input = e.target;
           const label = input.parentNode;
           label.parentNode.insertBefore(scanner.$canvas, label.nextSibling);
           scanner.$canvas.style.display = input.checked ? 'block' : 'none';
-      });
+
   
       document.getElementById('inversion-mode-select').addEventListener('change', event => {
           scanner.setInversionMode(event.target.value);
@@ -121,19 +137,23 @@
   
       flashToggle.addEventListener('click', () => {
           scanner.toggleFlash().then(() => flashState.textContent = scanner.isFlashOn() ? 'on' : 'off');
-      });
+      });*/
   
       document.getElementById('start-button').addEventListener('click', () => {
-          scanner.start();
+            reading = true;
+            console.log("voltei a ler")
+
       });
   
-      document.getElementById('stop-button').addEventListener('click', () => {
-          scanner.stop();
-      });
+/*      document.getElementById('stop-button').addEventListener('click', () => {
+        console.log("parei de ler")
+        scanner.stop();
+
+      });*/
   
       // ####### File Scanning #######
   
-      fileSelector.addEventListener('change', event => {
+ /*     fileSelector.addEventListener('change', event => {
           const file = fileSelector.files[0];
           if (!file) {
               return;
@@ -141,4 +161,8 @@
           QrScanner.scanImage(file, { returnDetailedScanResult: true })
               .then(result => setResult(fileQrResult, result))
               .catch(e => setResult(fileQrResult, { data: e || 'No QR code found.' }));
-      });
+      });*/
+
+
+
+
