@@ -4,9 +4,6 @@
 
 <head>
 
-  <!--<link rel="stylesheet" href="./style/style.css">-->
-
-
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,14 +16,15 @@
   <link rel="icon" href="/scr/img/logo.png" type="image/x-icon">
   <link rel="apple-touch-icon-precomposed" href="/scr/img/logo.png" type="image/x-icon">
 
+
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
+  
+  <script type="module" src="/js/script.js"></script> 
 
 
   <title>MVP IT Truck - CHECK-IN</title>
-
 
 
 </head>
@@ -42,16 +40,14 @@
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-      </div>
-      <select class="custom-select" id="inputGroupSelect01">
-        <option selected>Choose...</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+        <select id="sites">
+          <optionsite style="width: 500px;">Selecione o Site</option>
       </select>
+      <select id="tendas">
+        <option>Selecione a Tenda</option>
+    </select>
+      </div>
     </div>
-    
     
       <div class="d-flex justify-content-center">
         <video id="qr-video"></video>
@@ -100,9 +96,8 @@
   </div>
 -->
 
-  <script type="module" src="/js/qr-scanner.js"></script>
+  <script type="module" src="/js/qr-scanner.js"></script> 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-
 
 
 </body>
