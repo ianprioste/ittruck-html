@@ -8,6 +8,7 @@ $(document).ready(function () {
     crossDomain: true,
     processData: false,
     dataType: "json",
+    headers: { "x-api-key": "YAFO7K5IdH4LHjuEZmck98qiZrF0UjNcawE03EzZ"},
     data: '',
 
     success:function(data) {
@@ -43,6 +44,7 @@ document.getElementById('sites').addEventListener('change', () =>{
     crossDomain: true,
     processData: false,
     dataType: "json",
+    headers: { "x-api-key": "YAFO7K5IdH4LHjuEZmck98qiZrF0UjNcawE03EzZ"},
     data: '',
 
     success:function(data) {

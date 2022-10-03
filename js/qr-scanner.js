@@ -50,6 +50,7 @@ function setResult(label, result) {
                 crossDomain: true,
                 processData: false,
                 dataType: "json",
+                headers: { "x-api-key": "YAFO7K5IdH4LHjuEZmck98qiZrF0UjNcawE03EzZ"},
                 data: '',
 
                 success: function (data) {
