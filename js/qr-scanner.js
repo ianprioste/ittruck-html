@@ -32,12 +32,9 @@ function setResult(label, result) {
 
     const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaId});
 
-          // DEFINIR SITE E TENDA
 
-          var tendaId = document.getElementById("tendas").value;
-          var siteid = document.getElementById("sites").value;
-
-    
+    var tendaId = document.getElementById("tendas").value;
+    var siteid = document.getElementById("sites").value;
 
     
     if (reading & tendaId != 0 & siteid != 0) {
