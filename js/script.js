@@ -12,7 +12,12 @@ $(document).ready(function () {
     data: '',
 
     success:function(data) {
-      var listasites = data;
+      var listasites = data
+
+      var el = document.createElement("option");
+      el.textContent = "Selecione o Site";
+      el.value = 0;
+      sites.appendChild(el);
 
       for(var i = 0; i < listasites.length; i++) {
         var nome = listasites[i].nome;
@@ -50,6 +55,11 @@ document.getElementById('sites').addEventListener('change', () =>{
     success:function(data) {
       var listatendas = data;
 
+      var el = document.createElement("option");
+      el.textContent = "Selecione a Tenda";
+      el.value = 0;
+      tendas.appendChild(el);
+      
       for(var i = 0; i < listatendas.length; i++) {
         var nome = listatendas[i].nome;
         var id = listatendas[i].Id;

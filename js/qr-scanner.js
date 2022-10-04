@@ -32,13 +32,16 @@ function setResult(label, result) {
 
     const resultado = JSON.stringify({ nome: label.textContent, tenda:  tendaId});
 
+          // DEFINIR SITE E TENDA
+
+          var tendaId = document.getElementById("tendas").value;
+          var siteid = document.getElementById("sites").value;
+
     
-    if (reading & tendaId != "Selecione a Tenda") {
 
-        // DEFINIR SITE E TENDA
+    
+    if (reading & tendaId != 0 & siteid != 0) {
 
-        var tendaId = document.getElementById("tendas").value;
-        var siteid = document.getElementById("sites").value;
 
         console.log (resultado)
         $(document).ready(function () {
@@ -91,7 +94,11 @@ function setResult(label, result) {
 
          reading = false;
 
-    }        
+    }    if (tendaId == 0 || siteid == 0){
+            $('#exampleModal').modal('show'); // Abrir modal
+            document.getElementById("resposta").innerHTML = "Selecione o site e/ou a tenda"
+            console.log (tendaId + siteid)
+    }
 }
   
 // ####### Web Cam Scanning #######
