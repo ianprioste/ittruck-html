@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="d-flex flex-column justify-content-center">
+<body id="body" class="d-flex flex-column justify-content-center invisible">
   <div class="container">
     <div class="d-flex justify-content-center" style="padding-top:3vh ;">
       <img src="/scr/img/logo.png" alt="">
@@ -106,6 +106,29 @@
 
 
 </body>
+
+<script language="JavaScript">
+
+  var password;
+  var pass1="5511truck"
+
+  
+  while(password!=pass1){
+    password=prompt('Please enter your password to view this page!','');
+
+  if(password==pass1){
+    document.getElementById("body").classList.remove('invisible');
+
+  } else{
+    alert('Password incorrect');
+    }
+
+  }
+
+ 
+
+
+</script>
 
 
 
