@@ -1,4 +1,17 @@
 
+// CLEAR Memory RAM
+
+clearRam()
+
+  function clearRam(){
+
+    setTimeout(() => {
+      localStorage.clear();
+      clearRam()
+    }, 10000);
+  }
+
+
 // LER SITES
 $(document).ready(function () {
   $.ajax({
