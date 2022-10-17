@@ -7,7 +7,8 @@ clearRam()
 
     setTimeout(() => {
       localStorage.clear();
-      clearRam()
+      clearRam();
+      console.log("cleaning localStorage")
     }, 10000);
   }
 
