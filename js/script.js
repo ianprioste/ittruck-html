@@ -12,12 +12,14 @@ $(document).ready(function () {
     data: '',
 
     success:function(data) {
-      var listasites = data
+      var listasites = data.sort(GetSortOrder("nome"));
+
+      console.log(listasites)
 
       var el = document.createElement("option");
-      el.textContent = "Selecione o Site";
-      el.value = 0;
-      sites.appendChild(el);
+      //el.textContent = "Selecione o Site";
+      //el.value = 0;
+      //sites.appendChild(el);
 
       for(var i = 0; i < listasites.length; i++) {
         var nome = listasites[i].nome;
@@ -53,7 +55,7 @@ document.getElementById('sites').addEventListener('change', () =>{
     data: '',
 
     success:function(data) {
-      var listatendas = data;
+      var listatendas = data.sort(GetSortOrder("nome"));
 
       var el = document.createElement("option");
       el.textContent = "Selecione a Tenda";
@@ -79,3 +81,14 @@ document.getElementById('sites').addEventListener('change', () =>{
 
 });
 
+//Comparer Function    
+function GetSortOrder(prop) {    
+  return function(a, b) {    
+      if (a[prop] > b[prop]) {    
+          return 1;    
+      } else if (a[prop] < b[prop]) {    
+          return -1;    
+      }    
+      return 0;    
+  }    
+}    
