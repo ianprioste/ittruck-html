@@ -14,8 +14,6 @@ $(document).ready(function () {
     success:function(data) {
       var listasites = data.sort(GetSortOrder("nome"));
 
-      console.log(listasites)
-
       var el = document.createElement("option");
       //el.textContent = "Selecione o Site";
       //el.value = 0;
