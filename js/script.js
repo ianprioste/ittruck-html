@@ -77,4 +77,5 @@ document.getElementById('sites').addEventListener('change', () =>{
     }
   });
 
-})
+});
+
