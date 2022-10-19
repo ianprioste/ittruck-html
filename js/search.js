@@ -34,15 +34,15 @@ document.getElementById("btnsearch").addEventListener('click', ()=>{
 
                     console.log(data)
 
-                    if(pontos>=2300){
+                    if(pontos>=1700){
                         var categoria = "A"
                         var msg = "Você já está na ELITE!"
-                    } else if(pontos<2300 & pontos>=1200){
+                    } else if(pontos<1700 & pontos>=900){
                         var categoria = "B"
-                        var msg = `Faltam ${2300-pontos} para você atingir a categoria A`
+                        var msg = `Faltam ${1700-pontos} para você atingir a categoria A`
                     } else {
                         var categoria = "C"
-                        var msg = `Faltam ${1200-pontos} para você atingir a categoria B`
+                        var msg = `Faltam ${900-pontos} para você atingir a categoria B`
                     }
                 
                     document.getElementById("nome").innerHTML = data.nome
