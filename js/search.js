@@ -1,23 +1,13 @@
 // BUSCAR EMAIL 
 
-var input =  document.getElementById('email');
+export async function search(){
 
-input.addEventListener('keypress', function(event){
-
-    if(event.key == "Enter"){
-        event.preventDefault();
-        document.getElementById("btnsearch").click()
-    }
-
-});
-
-
-document.getElementById("btnsearch").addEventListener('click', ()=>{
+    let idqrcode = ""
 
     var email =  document.getElementById('email').value
 
     if(email.length !=0){
-        $.ajax({
+        return $.ajax({
             type: "GET",
             url: 'https://9xoqrdy855.execute-api.us-east-1.amazonaws.com/dev/consultaemail?email=' + email,
             contentType: 'application/json',
@@ -32,8 +22,6 @@ document.getElementById("btnsearch").addEventListener('click', ()=>{
                 if(data.status == 200){
                     var pontos = data.pontos
 
-                    console.log(data)
-
                     if(pontos>=1700){
                         var categoria = "A"
                         var msg = "Você já está na ELITE!"
@@ -46,29 +34,28 @@ document.getElementById("btnsearch").addEventListener('click', ()=>{
                     }
                 
                     document.getElementById("nome").innerHTML = data.nome
-                    document.getElementById("pontos").innerHTML = data.pontos
+                    document.getElementById("pontos").innerHTML = data.pontos   
+                    document.getElementById("idqrcode").value = data.id                 
                     document.getElementById("categoria").innerHTML = categoria
                     document.getElementById("msg").innerHTML = msg
+                    document.getElementById("erro").innerHTML = ""
 
-                    document.getElementById("erro").innerHTML = "";
-
-
+                  
                     document.getElementById("result").classList.remove('invisible');
 
                 }
-
+                
                 else{
-                    console.log(data)
                     document.getElementById("result").classList.add('invisible');
                     document.getElementById("erro").innerHTML = data.nome;
                 }
 
             }
 
-        })
 
+        })
     }
     else
       console.log("Is empty")
+}
 
-});
